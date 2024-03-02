@@ -3,6 +3,7 @@ import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {BreweryTypes} from '../../types';
 import {colors} from '../../theme/colors';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {useNavigate} from '../../hooks';
 
 type Props = {
   item: BreweryTypes;
@@ -11,8 +12,12 @@ type Props = {
 export const Thumbnail: React.FC<Props> = ({item}) => {
   const {name, street, city, state} = item;
 
+  const {navigateTo} = useNavigate();
+
   return (
-    <TouchableOpacity style={styles.thumbnail}>
+    <TouchableOpacity
+      onPress={() => navigateTo('BreweryDetailsScreen', item)}
+      style={styles.thumbnail}>
       <Ionicons name="beer-outline" size={30} style={styles.beerIcon} />
 
       <View style={styles.line} />
@@ -32,7 +37,8 @@ const styles = StyleSheet.create({
   thumbnail: {
     alignSelf: 'center',
     alignItems: 'center',
-    backgroundColor: colors.white,
+    borderWidth: 1,
+    backgroundColor: colors.yellow,
     borderRadius: 5,
     flexDirection: 'row',
     marginVertical: 10,

@@ -1,3 +1,6 @@
+import {RouteProp} from '@react-navigation/native';
+import {StackParamList} from '../navigation/HomeStackNavigator';
+
 export type BreweryTypes = {
   id: string;
   name: string;
@@ -16,3 +19,8 @@ export type BreweryTypes = {
   state: string;
   street: string;
 };
+
+export type BreweryRouteType = RouteProp<
+  StackParamList,
+  'BreweryDetailsScreen'
+>;

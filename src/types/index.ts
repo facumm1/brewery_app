@@ -1,3 +1,3 @@
-import {BreweryTypes} from './BreweryTypes';
+import {BreweryTypes, BreweryRouteType} from './BreweryTypes';
 
-export type {BreweryTypes};
+export type {BreweryTypes, BreweryRouteType};
