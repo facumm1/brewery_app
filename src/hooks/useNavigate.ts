@@ -6,6 +6,7 @@ import {BreweryTypes} from '../types';
 type UseNavigateHook = {
   navigateTo: (screenName: ScreenName, data: BreweryTypes | any) => void;
   goBackNav: () => void;
+  updateFavIcon: (brewery: BreweryTypes) => void;
 };
 
 type ScreenName = keyof StackParamList;
@@ -24,5 +25,9 @@ export const useNavigate = (): UseNavigateHook => {
     navigation.goBack();
   };
 
-  return {navigateTo, goBackNav};
+  const updateFavIcon = (brewery: BreweryTypes) => {
+    navigation.setParams({...brewery, isFavourite: !brewery.isFavourite});
+  };
+
+  return {navigateTo, goBackNav, updateFavIcon};
 };

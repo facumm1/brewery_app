@@ -1,25 +1,26 @@
 import React from 'react';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import AntDesign from 'react-native-vector-icons/AntDesign';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import {colors} from '../../theme/colors';
-import {useNavigate, useToggle} from '../../hooks';
 import {BreweryTypes} from '../../types';
+import {GoBackButton} from '../Button';
 
-export const DetailsHeader: React.FC<{breweryData: BreweryTypes}> = ({
+type Props = {
+  breweryData: BreweryTypes;
+  handleFavourite: () => void;
+};
+
+export const DetailsHeader: React.FC<Props> = ({
   breweryData,
+  handleFavourite,
 }) => {
-  const {goBackNav} = useNavigate();
-  const {on, setToggle} = useToggle();
-  const {name, state} = breweryData;
+  const {name, state, isFavourite} = breweryData;
 
   return (
     <View style={styles.container}>
       <View style={styles.top}>
-        <TouchableOpacity onPress={goBackNav} style={styles.backBtn}>
-          <AntDesign style={{color: colors.black}} name="arrowleft" size={30} />
-        </TouchableOpacity>
+        <GoBackButton />
 
         <Text style={styles.title}>Brewery details</Text>
       </View>
@@ -29,10 +30,10 @@ export const DetailsHeader: React.FC<{breweryData: BreweryTypes}> = ({
           <Text style={styles.state}>{state}</Text>
         </View>
 
-        <TouchableOpacity style={styles.favBtn} onPress={setToggle}>
+        <TouchableOpacity style={styles.favBtn} onPress={handleFavourite}>
           <Ionicons
             style={styles.favIcon}
-            name={on ? 'heart' : 'heart-outline'}
+            name={isFavourite ? 'heart' : 'heart-outline'}
             color={colors.yellow}
             size={30}
           />
@@ -51,7 +52,6 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 15,
   },
   top: {flexDirection: 'row', justifyContent: 'center'},
-  backBtn: {position: 'absolute', left: 15, top: 10, zIndex: 1},
   title: {
     color: colors.black,
     fontSize: 18,

@@ -1,3 +1,4 @@
 import {BreweryTypes, BreweryRouteType} from './BreweryTypes';
+import {RootState} from './reduxTypes';
 
-export type {BreweryTypes, BreweryRouteType};
+export type {BreweryTypes, BreweryRouteType, RootState};

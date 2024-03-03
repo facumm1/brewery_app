@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
+import {useIsFocused} from '@react-navigation/native';
 
 import {DetailsHeader} from '../components/Header/DetailsHeader';
 import {WebsiteButton} from '../components/Button/WebsiteButton';
@@ -8,19 +9,45 @@ import {Divider} from '../components/Divider/Divider';
 import {colors} from '../theme/colors';
 import {capitalizeFirstLetter} from '../util';
 import {BreweryRouteType} from '../types';
+import {useFavourite, useNavigate} from '../hooks';
 
 type Props = {
   route: BreweryRouteType;
 };
 
 export const BreweryDetailsScreen: React.FC<Props> = ({route}) => {
-  const {street, city, brewery_type, website_url, phone} = route.params;
+  const {id, street, city, brewery_type, website_url, phone, isFavourite} =
+    route.params;
+
+  const isFocused = useIsFocused();
+  const {goBackNav, updateFavIcon} = useNavigate();
+  const {addToFavourites, removeFromFavourites} = useFavourite();
+
+  const handleFavourite = () => {
+    updateFavIcon(route.params); //Updates isFavourite from route.params
+
+    if (isFavourite) {
+      removeFromFavourites(id); //Remove brewery from favsData
+    } else {
+      addToFavourites(route.params); //Add brewery to favsData
+    }
+  };
+
+  useEffect(() => {
+    if (!isFocused) {
+      goBackNav();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isFocused]);
 
   //TODO send only necessary data to each component, review phone card, separate cards into one
   return (
     <View style={styles.container}>
       {/* Header */}
-      <DetailsHeader breweryData={route.params} />
+      <DetailsHeader
+        breweryData={route.params}
+        handleFavourite={handleFavourite}
+      />
 
       {/* Info */}
       <View style={styles.row}>

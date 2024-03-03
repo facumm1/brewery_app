@@ -1,3 +1,3 @@
-import {NoBreweries} from './NoBreweries';
+import {NoFavourites} from './NoFavourites';
 
-export {NoBreweries};
+export {NoFavourites};

@@ -18,6 +18,7 @@ export type BreweryTypes = {
   website_url: string;
   state: string;
   street: string;
+  isFavourite: boolean;
 };
 
 export type BreweryRouteType = RouteProp<

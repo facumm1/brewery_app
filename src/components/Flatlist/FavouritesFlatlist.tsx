@@ -2,23 +2,23 @@ import React from 'react';
 import {FlatList} from 'react-native';
 import {useSelector} from 'react-redux';
 
-import {Thumbnail} from '../Thumbnail/Thumbnail';
-import {Loader} from '../Loader/Loader';
-import {RootState} from '../../types';
 import {colors} from '../../theme/colors';
+import {Thumbnail} from '../Thumbnail/Thumbnail';
+import {NoFavourites} from '../Alert';
+import {RootState} from '../../types';
 
-export const BreweriesFlatlist: React.FC = () => {
-  const {breweriesData} = useSelector(
-    (state: RootState) => state.breweriesData,
+export const FavouritesFlatlist: React.FC = () => {
+  const {favouritesData} = useSelector(
+    (state: RootState) => state.favouritesData,
   );
 
   return (
     <FlatList
       style={{backgroundColor: colors.black}}
-      data={breweriesData}
+      data={favouritesData}
       keyExtractor={({id}) => id}
       renderItem={({item}) => <Thumbnail item={item} />}
-      ListEmptyComponent={Loader}
+      ListEmptyComponent={NoFavourites}
     />
   );
 };

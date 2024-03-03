@@ -1,3 +1,4 @@
 import {BreweriesFlatlist} from './BreweriesFlatlist';
+import {FavouritesFlatlist} from './FavouritesFlatlist';
 
-export {BreweriesFlatlist};
+export {BreweriesFlatlist, FavouritesFlatlist};

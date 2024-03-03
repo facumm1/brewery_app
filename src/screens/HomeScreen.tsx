@@ -3,18 +3,16 @@ import {StyleSheet, Text, View} from 'react-native';
 
 import {BreweriesFlatlist} from '../components/Flatlist';
 import {colors} from '../theme/colors';
-import {useFetch} from '../hooks';
 
 export const HomeScreen: React.FC = () => {
-  const {data} = useFetch();
-
+  //TODO fix empty screen
   //Fixed
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Search for breweries</Text>
 
       <View style={styles.flatlistBox}>
-        <BreweriesFlatlist data={data} />
+        <BreweriesFlatlist />
       </View>
     </View>
   );
