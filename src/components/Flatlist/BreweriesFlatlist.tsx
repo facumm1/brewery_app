@@ -7,10 +7,14 @@ import {Loader} from '../Loader/Loader';
 import {RootState} from '../../types';
 import {colors} from '../../theme/colors';
 
-export const BreweriesFlatlist: React.FC = () => {
+export const BreweriesFlatlist: React.FC<{
+  handlePagination: () => void;
+}> = ({handlePagination}) => {
   const {breweriesData} = useSelector(
     (state: RootState) => state.breweriesData,
   );
+
+  const renderFooter = breweriesData.length > 0 ? <Loader /> : <></>;
 
   return (
     <FlatList
@@ -19,6 +23,8 @@ export const BreweriesFlatlist: React.FC = () => {
       keyExtractor={({id}) => id}
       renderItem={({item}) => <Thumbnail item={item} />}
       ListEmptyComponent={Loader}
+      onEndReached={handlePagination}
+      ListFooterComponent={renderFooter}
     />
   );
 };

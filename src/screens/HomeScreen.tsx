@@ -4,7 +4,9 @@ import {StyleSheet, Text, View} from 'react-native';
 import {BreweriesFlatlist} from '../components/Flatlist';
 import {colors} from '../theme/colors';
 
-export const HomeScreen: React.FC = () => {
+export const HomeScreen: React.FC<{handlePagination: () => void}> = ({
+  handlePagination,
+}) => {
   //TODO fix empty screen
   //Fixed
   return (
@@ -12,7 +14,7 @@ export const HomeScreen: React.FC = () => {
       <Text style={styles.title}>Search for breweries</Text>
 
       <View style={styles.flatlistBox}>
-        <BreweriesFlatlist />
+        <BreweriesFlatlist handlePagination={handlePagination} />
       </View>
     </View>
   );

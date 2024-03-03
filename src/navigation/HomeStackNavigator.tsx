@@ -2,10 +2,11 @@ import React, {useEffect} from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {useDispatch} from 'react-redux';
 
+import {useFetchBreweriesQuery} from '../redux/breweryApi';
 import {BreweryDetailsScreen, HomeScreen} from '../screens';
 import {BreweryTypes} from '../types';
 import {setBreweries} from '../redux/breweriesSlice';
-import {useFetchBreweriesQuery} from '../redux/breweryApi';
+import {usePagination} from '../hooks';
 
 export type StackParamList = {
   HomeScreen: undefined;
@@ -15,7 +16,8 @@ export type StackParamList = {
 const Stack = createNativeStackNavigator<StackParamList>();
 
 export const HomeStackNavigator: React.FC = () => {
-  const {data, isLoading} = useFetchBreweriesQuery({});
+  const {pagination, handlePagination} = usePagination();
+  const {data, isLoading} = useFetchBreweriesQuery({limit: pagination});
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -31,7 +33,10 @@ export const HomeStackNavigator: React.FC = () => {
         headerShown: false,
         animation: 'slide_from_right',
       }}>
-      <Stack.Screen name="HomeScreen" component={HomeScreen} />
+      <Stack.Screen
+        name="HomeScreen"
+        children={() => <HomeScreen handlePagination={handlePagination} />}
+      />
       <Stack.Screen
         name="BreweryDetailsScreen"
         component={BreweryDetailsScreen}

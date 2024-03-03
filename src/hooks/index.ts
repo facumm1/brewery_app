@@ -1,6 +1,6 @@
 import {useFetch} from './useFetch';
 import {useNavigate} from './useNavigate';
-import useToggle from './useToggle';
 import {useFavourite} from './useFavourite';
+import {usePagination} from './usePagination';
 
-export {useFetch, useNavigate, useToggle, useFavourite};
+export {useFetch, useNavigate, useFavourite, usePagination};

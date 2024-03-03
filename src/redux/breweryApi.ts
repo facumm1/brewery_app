@@ -10,7 +10,7 @@ export const breweryApi = createApi({
   baseQuery: fetchBaseQuery({baseUrl}),
   endpoints: builder => ({
     fetchBreweries: builder.query({
-      query: () => '/breweries?per_page=10',
+      query: ({limit}) => `/breweries?per_page=${limit}`,
       transformResponse: (res: ApiResponse) => {
         const breweries = res.map((brewery: BreweryTypes) => ({
           ...brewery,
