@@ -9,7 +9,10 @@ export const breweriesSlice = createSlice({
   },
   reducers: {
     setBreweries: (state, action) => {
-      state.breweriesData = action.payload;
+      const newBreweries = action.payload;
+
+      state.breweriesData = [...state.breweriesData, ...newBreweries];
+
       state.isLoading = false;
     },
     toggleBrewery: (state, action) => {

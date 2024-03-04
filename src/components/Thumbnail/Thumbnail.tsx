@@ -23,9 +23,11 @@ export const Thumbnail: React.FC<Props> = ({item}) => {
       <View style={styles.line} />
 
       <View style={styles.breweryInfo}>
-        <Text style={styles.name}>{name}</Text>
-        <Text>{street}</Text>
-        <Text style={styles.cityState}>
+        <Text numberOfLines={1} style={styles.name}>
+          {name}
+        </Text>
+        <Text numberOfLines={1}>{street}</Text>
+        <Text numberOfLines={1} style={styles.cityState}>
           {city}, {state}
         </Text>
       </View>
@@ -46,7 +48,7 @@ const styles = StyleSheet.create({
   },
   beerIcon: {paddingHorizontal: 10},
   line: {height: '75%', width: 2, backgroundColor: colors.black},
-  breweryInfo: {paddingVertical: 10, paddingLeft: 7.5},
+  breweryInfo: {paddingVertical: 10, paddingLeft: 7.5, flexShrink: 1},
   name: {fontSize: 18, fontWeight: '600'},
   cityState: {fontWeight: '500'},
 });

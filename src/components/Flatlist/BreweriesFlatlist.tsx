@@ -7,9 +7,17 @@ import {Loader} from '../Loader/Loader';
 import {RootState} from '../../types';
 import {colors} from '../../theme/colors';
 
-export const BreweriesFlatlist: React.FC<{
+type Props = {
   handlePagination: () => void;
-}> = ({handlePagination}) => {
+  flatListRef: React.RefObject<FlatList>;
+  onScroll: (event: any) => void;
+};
+
+export const BreweriesFlatlist: React.FC<Props> = ({
+  handlePagination,
+  flatListRef,
+  onScroll,
+}) => {
   const {breweriesData} = useSelector(
     (state: RootState) => state.breweriesData,
   );
@@ -18,6 +26,7 @@ export const BreweriesFlatlist: React.FC<{
 
   return (
     <FlatList
+      ref={flatListRef}
       style={{backgroundColor: colors.black}}
       data={breweriesData}
       keyExtractor={({id}) => id}
@@ -25,6 +34,7 @@ export const BreweriesFlatlist: React.FC<{
       ListEmptyComponent={Loader}
       onEndReached={handlePagination}
       ListFooterComponent={renderFooter}
+      onScroll={onScroll}
     />
   );
 };

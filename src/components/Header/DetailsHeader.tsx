@@ -65,9 +65,11 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
   },
   stateBox: {
+    alignSelf: 'center',
     backgroundColor: colors.black,
     borderRadius: 10,
-    paddingHorizontal: 15,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
     justifyContent: 'center',
   },
   state: {
@@ -80,7 +82,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 25,
   },
-  favIcon: {padding: 5},
+  favIcon: {padding: 10},
   breweryName: {
     fontSize: 22,
     color: colors.black,

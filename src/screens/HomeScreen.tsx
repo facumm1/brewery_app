@@ -2,11 +2,15 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
 import {BreweriesFlatlist} from '../components/Flatlist';
+import {GoTopButton} from '../components/Button';
 import {colors} from '../theme/colors';
+import {useScroll} from '../hooks';
 
 export const HomeScreen: React.FC<{handlePagination: () => void}> = ({
   handlePagination,
 }) => {
+  const {showTopBtn, onScroll, flatListRef, scrollToTop} = useScroll();
+
   //TODO fix empty screen
   //Fixed
   return (
@@ -14,7 +18,13 @@ export const HomeScreen: React.FC<{handlePagination: () => void}> = ({
       <Text style={styles.title}>Search for breweries</Text>
 
       <View style={styles.flatlistBox}>
-        <BreweriesFlatlist handlePagination={handlePagination} />
+        <GoTopButton showTopBtn={showTopBtn} scrollToTop={scrollToTop} />
+
+        <BreweriesFlatlist
+          flatListRef={flatListRef}
+          handlePagination={handlePagination}
+          onScroll={onScroll}
+        />
       </View>
     </View>
   );
