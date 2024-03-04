@@ -25,7 +25,7 @@ export const BottomTabNavigator: React.FC = () => {
         headerShown: false,
         tabBarStyle: {
           backgroundColor: colors.black,
-          height: 60,
+          height: 90,
           borderTopWidth: 0,
           elevation: 0,
         },

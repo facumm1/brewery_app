@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 
 import {BreweriesFlatlist} from '../components/Flatlist';
 import {GoTopButton} from '../components/Button';
@@ -14,23 +14,26 @@ export const HomeScreen: React.FC<{handlePagination: () => void}> = ({
   //TODO fix empty screen
   //Fixed
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Search for breweries</Text>
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.container}>
+        <Text style={styles.title}>Search for breweries</Text>
 
-      <View style={styles.flatlistBox}>
-        <GoTopButton showTopBtn={showTopBtn} scrollToTop={scrollToTop} />
+        <View style={styles.flatlistBox}>
+          <GoTopButton showTopBtn={showTopBtn} scrollToTop={scrollToTop} />
 
-        <BreweriesFlatlist
-          flatListRef={flatListRef}
-          handlePagination={handlePagination}
-          onScroll={onScroll}
-        />
+          <BreweriesFlatlist
+            flatListRef={flatListRef}
+            handlePagination={handlePagination}
+            onScroll={onScroll}
+          />
+        </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  safeArea: {flex: 1, backgroundColor: colors.black},
   container: {
     alignSelf: 'center',
     backgroundColor: colors.black,
@@ -44,5 +47,9 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     fontWeight: '500',
   },
-  flatlistBox: {backgroundColor: colors.black, marginBottom: 35},
+  flatlistBox: {
+    backgroundColor: colors.black,
+    marginBottom: 35,
+    height: '94%',
+  },
 });

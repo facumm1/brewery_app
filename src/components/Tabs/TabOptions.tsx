@@ -16,9 +16,7 @@ export const HomeStackOptions = {
       size={25}
     />
   ),
-  tabBarLabel: () => (
-    <Text style={{color: colors.yellow, paddingBottom: 5}}>Breweries</Text>
-  ),
+  tabBarLabel: () => <Text style={{color: colors.yellow}}>Breweries</Text>,
 };
 
 export const FavouriteStackOptions = {
@@ -29,7 +27,5 @@ export const FavouriteStackOptions = {
       size={25}
     />
   ),
-  tabBarLabel: () => (
-    <Text style={{color: colors.yellow, paddingBottom: 5}}>Favourites</Text>
-  ),
+  tabBarLabel: () => <Text style={{color: colors.yellow}}>Favourites</Text>,
 };

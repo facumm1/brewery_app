@@ -1,22 +1,25 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 
 import {colors} from '../theme/colors';
 import {FavouritesFlatlist} from '../components/Flatlist';
 
 export const FavouritesScreen: React.FC = () => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Favourite breweries</Text>
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.container}>
+        <Text style={styles.title}>Favourite breweries</Text>
 
-      <View style={styles.flatlistBox}>
-        <FavouritesFlatlist />
+        <View style={styles.flatlistBox}>
+          <FavouritesFlatlist />
+        </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  safeArea: {flex: 1, backgroundColor: colors.black},
   container: {
     alignSelf: 'center',
     backgroundColor: colors.black,
@@ -30,5 +33,9 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     fontWeight: '500',
   },
-  flatlistBox: {backgroundColor: colors.black, marginBottom: 35},
+  flatlistBox: {
+    backgroundColor: colors.black,
+    marginBottom: 35,
+    height: '94%',
+  },
 });

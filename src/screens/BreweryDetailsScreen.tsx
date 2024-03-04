@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import {useIsFocused} from '@react-navigation/native';
 
 import {DetailsHeader} from '../components/Header/DetailsHeader';
@@ -42,48 +42,50 @@ export const BreweryDetailsScreen: React.FC<Props> = ({route}) => {
 
   //TODO send only necessary data to each component, review phone card, separate cards into one
   return (
-    <View style={styles.container}>
-      {/* Header */}
-      <DetailsHeader
-        breweryData={route.params}
-        handleFavourite={handleFavourite}
-      />
+    <SafeAreaView style={{flex: 1, backgroundColor: colors.yellow}}>
+      <View style={styles.container}>
+        {/* Header */}
+        <DetailsHeader
+          breweryData={route.params}
+          handleFavourite={handleFavourite}
+        />
 
-      {/* Info */}
-      <View style={styles.row}>
-        <View style={[styles.card, styles.shadow]}>
-          <Text style={styles.cardTitle}>City</Text>
-          <Divider />
-          <Text style={styles.cardText}>{city}</Text>
+        {/* Info */}
+        <View style={styles.row}>
+          <View style={[styles.card, styles.shadow]}>
+            <Text style={styles.cardTitle}>City</Text>
+            <Divider />
+            <Text style={styles.cardText}>{city}</Text>
+          </View>
+
+          <View style={[styles.card, styles.shadow]}>
+            <Text style={styles.cardTitle}>Brewery Type</Text>
+            <Divider />
+
+            <Text style={styles.cardText}>
+              {capitalizeFirstLetter(brewery_type)}
+            </Text>
+          </View>
         </View>
 
-        <View style={[styles.card, styles.shadow]}>
-          <Text style={styles.cardTitle}>Brewery Type</Text>
-          <Divider />
+        <View style={styles.row}>
+          <View style={[styles.card, styles.shadow]}>
+            <Text style={styles.cardTitle}>Phone</Text>
+            <Divider />
+            <Text style={styles.cardText}>{phone}</Text>
+          </View>
 
-          <Text style={styles.cardText}>
-            {capitalizeFirstLetter(brewery_type)}
-          </Text>
+          <View style={[styles.card, styles.shadow]}>
+            <Text style={styles.cardTitle}>Address</Text>
+            <Divider />
+            <Text style={styles.cardText}>{street}</Text>
+          </View>
         </View>
+
+        {/* Go to web */}
+        <WebsiteButton website_url={website_url} />
       </View>
-
-      <View style={styles.row}>
-        <View style={[styles.card, styles.shadow]}>
-          <Text style={styles.cardTitle}>Phone</Text>
-          <Divider />
-          <Text style={styles.cardText}>{phone}</Text>
-        </View>
-
-        <View style={[styles.card, styles.shadow]}>
-          <Text style={styles.cardTitle}>Address</Text>
-          <Divider />
-          <Text style={styles.cardText}>{street}</Text>
-        </View>
-      </View>
-
-      {/* Go to web */}
-      <WebsiteButton website_url={website_url} />
-    </View>
+    </SafeAreaView>
   );
 };
 

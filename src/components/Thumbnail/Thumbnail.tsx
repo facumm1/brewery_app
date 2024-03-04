@@ -1,8 +1,10 @@
 import React from 'react';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+
 import {BreweryTypes} from '../../types';
 import {colors} from '../../theme/colors';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useNavigate} from '../../hooks';
 
 type Props = {
@@ -26,10 +28,17 @@ export const Thumbnail: React.FC<Props> = ({item}) => {
         <Text numberOfLines={1} style={styles.name}>
           {name}
         </Text>
-        <Text numberOfLines={1}>{street}</Text>
-        <Text numberOfLines={1} style={styles.cityState}>
-          {city}, {state}
-        </Text>
+
+        <View style={styles.locationBox}>
+          <MaterialIcons name="location-on" size={25} />
+
+          <View style={{marginLeft: 5}}>
+            <Text numberOfLines={1}>{street}</Text>
+            <Text numberOfLines={1} style={styles.cityState}>
+              {city}, {state}
+            </Text>
+          </View>
+        </View>
       </View>
     </TouchableOpacity>
   );
@@ -50,5 +59,6 @@ const styles = StyleSheet.create({
   line: {height: '75%', width: 2, backgroundColor: colors.black},
   breweryInfo: {paddingVertical: 10, paddingLeft: 7.5, flexShrink: 1},
   name: {fontSize: 18, fontWeight: '600'},
+  locationBox: {flexDirection: 'row', alignItems: 'center', marginTop: 5},
   cityState: {fontWeight: '500'},
 });
