@@ -29,3 +29,14 @@ export const FavouriteStackOptions = {
   ),
   tabBarLabel: () => <Text style={{color: colors.yellow}}>Favourites</Text>,
 };
+
+export const SearchStackOptions = {
+  tabBarIcon: ({focused}: OptionsParams) => (
+    <Ionicons
+      name={focused ? 'search-sharp' : 'search-outline'}
+      color={colors.yellow}
+      size={25}
+    />
+  ),
+  tabBarLabel: () => <Text style={{color: colors.yellow}}>Search</Text>,
+};

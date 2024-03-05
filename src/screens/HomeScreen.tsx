@@ -16,7 +16,7 @@ export const HomeScreen: React.FC<{handlePagination: () => void}> = ({
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
-        <Text style={styles.title}>Search for breweries</Text>
+        <Text style={styles.title}>Explore breweries</Text>
 
         <View style={styles.flatlistBox}>
           <GoTopButton showTopBtn={showTopBtn} scrollToTop={scrollToTop} />

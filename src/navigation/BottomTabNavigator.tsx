@@ -1,16 +1,22 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-import {HomeStackNavigator, FavouriteStackNavigator} from './';
+import {
+  HomeStackNavigator,
+  FavouriteStackNavigator,
+  SearchStackNavigator,
+} from './';
 import {colors} from '../theme/colors';
 import {
   FavouriteStackOptions,
   HomeStackOptions,
+  SearchStackOptions,
 } from '../components/Tabs/TabOptions';
 
 export type TabParamList = {
   HomeStackNavigator: undefined;
   FavouriteStackNavigator: undefined;
+  SearchStackNavigator: undefined;
 };
 
 const Tab = createBottomTabNavigator<TabParamList>();
@@ -34,6 +40,11 @@ export const BottomTabNavigator: React.FC = () => {
         name="HomeStackNavigator"
         component={HomeStackNavigator}
         options={HomeStackOptions}
+      />
+      <Tab.Screen
+        name="SearchStackNavigator"
+        component={SearchStackNavigator}
+        options={SearchStackOptions}
       />
       <Tab.Screen
         name="FavouriteStackNavigator"

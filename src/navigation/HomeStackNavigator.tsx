@@ -17,7 +17,7 @@ const Stack = createNativeStackNavigator<StackParamList>();
 
 export const HomeStackNavigator: React.FC = () => {
   const {pagination, handlePagination} = usePagination();
-  const {data, isLoading} = useFetchBreweriesQuery({limit: pagination});
+  const {data, isLoading} = useFetchBreweriesQuery({page: pagination});
   const dispatch = useDispatch();
 
   useEffect(() => {

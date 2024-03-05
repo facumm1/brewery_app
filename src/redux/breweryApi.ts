@@ -10,7 +10,18 @@ export const breweryApi = createApi({
   baseQuery: fetchBaseQuery({baseUrl}),
   endpoints: builder => ({
     fetchBreweries: builder.query({
-      query: ({limit}) => `/breweries?page=${limit}&per_page=10`,
+      query: ({page}) => `/breweries?page=${page}&per_page=10`,
+      transformResponse: (res: ApiResponse) => {
+        const breweries = res.map((brewery: BreweryTypes) => ({
+          ...brewery,
+          isFavourite: false,
+        }));
+
+        return breweries;
+      },
+    }),
+    filterByName: builder.query({
+      query: ({name}) => `/breweries?by_name=${name}&page=1&per_page=10`,
       transformResponse: (res: ApiResponse) => {
         const breweries = res.map((brewery: BreweryTypes) => ({
           ...brewery,
@@ -23,4 +34,4 @@ export const breweryApi = createApi({
   }),
 });
 
-export const {useFetchBreweriesQuery} = breweryApi;
+export const {useFetchBreweriesQuery, useFilterByNameQuery} = breweryApi;
