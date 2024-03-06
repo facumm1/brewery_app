@@ -1,11 +1,11 @@
-import {useState} from 'react';
+import {useCallback, useState} from 'react';
 
 export const useField = () => {
   const [keepWriting, setKeepWriting] = useState<boolean>(false);
   const [showSearchResults, setShowSearchResults] = useState<boolean>(false);
   const [fieldValue, setFieldValue] = useState<string | null>(null);
 
-  const onChangeText = (text: string) => {
+  const onChangeText = useCallback((text: string) => {
     setFieldValue(text);
 
     if (text.length === 0) {
@@ -24,13 +24,13 @@ export const useField = () => {
       setShowSearchResults(true);
       return;
     }
-  };
+  }, []);
 
-  const clearResults = () => {
+  const clearResults = useCallback(() => {
     setFieldValue('');
     setShowSearchResults(false);
     setKeepWriting(false);
-  };
+  }, []);
 
   return {
     keepWriting,

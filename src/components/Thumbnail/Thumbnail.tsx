@@ -11,10 +11,25 @@ type Props = {
   item: BreweryTypes;
 };
 
-export const Thumbnail: React.FC<Props> = ({item}) => {
+export const Thumbnail: React.FC<Props> = React.memo(({item}) => {
   const {name, street, city, state} = item;
 
   const {navigateTo} = useNavigate();
+
+  const checkText = React.useCallback(
+    (text: string, customErrorMsg: string = 'Unknown') => {
+      if (!text) {
+        return customErrorMsg;
+      }
+
+      if (text.length < 0) {
+        return customErrorMsg;
+      }
+
+      return text;
+    },
+    [],
+  );
 
   return (
     <TouchableOpacity
@@ -33,7 +48,7 @@ export const Thumbnail: React.FC<Props> = ({item}) => {
           <MaterialIcons name="location-on" size={25} />
 
           <View style={{marginLeft: 5}}>
-            <Text numberOfLines={1}>{street}</Text>
+            <Text numberOfLines={1}>{checkText(street)}</Text>
             <Text numberOfLines={1} style={styles.cityState}>
               {city}, {state}
             </Text>
@@ -42,7 +57,7 @@ export const Thumbnail: React.FC<Props> = ({item}) => {
       </View>
     </TouchableOpacity>
   );
-};
+});
 
 const styles = StyleSheet.create({
   thumbnail: {

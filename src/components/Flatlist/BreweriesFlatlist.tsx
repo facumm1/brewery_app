@@ -13,28 +13,26 @@ type Props = {
   onScroll: (event: any) => void;
 };
 
-export const BreweriesFlatlist: React.FC<Props> = ({
-  handlePagination,
-  flatListRef,
-  onScroll,
-}) => {
-  const {breweriesData} = useSelector(
-    (state: RootState) => state.breweriesData,
-  );
+export const BreweriesFlatlist: React.FC<Props> = React.memo(
+  ({handlePagination, flatListRef, onScroll}) => {
+    const {breweriesData} = useSelector(
+      (state: RootState) => state.breweriesData,
+    );
 
-  const renderFooter = breweriesData.length > 0 ? <Loader /> : <></>;
+    const renderFooter = breweriesData.length > 0 ? <Loader /> : <></>;
 
-  return (
-    <FlatList
-      ref={flatListRef}
-      style={{backgroundColor: colors.black}}
-      data={breweriesData}
-      keyExtractor={({id}) => id}
-      renderItem={({item}) => <Thumbnail item={item} />}
-      ListEmptyComponent={Loader}
-      onEndReached={handlePagination}
-      ListFooterComponent={renderFooter}
-      onScroll={onScroll}
-    />
-  );
-};
+    return (
+      <FlatList
+        ref={flatListRef}
+        style={{backgroundColor: colors.black}}
+        data={breweriesData}
+        keyExtractor={({id}) => id}
+        renderItem={({item}) => <Thumbnail item={item} />}
+        ListEmptyComponent={Loader}
+        onEndReached={handlePagination}
+        ListFooterComponent={renderFooter}
+        onScroll={onScroll}
+      />
+    );
+  },
+);

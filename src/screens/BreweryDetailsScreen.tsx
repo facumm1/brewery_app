@@ -1,15 +1,16 @@
 import React, {useEffect} from 'react';
-import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {SafeAreaView, StyleSheet, View} from 'react-native';
 import {useIsFocused} from '@react-navigation/native';
 
 import {DetailsHeader} from '../components/Header/DetailsHeader';
 import {WebsiteButton} from '../components/Button/WebsiteButton';
-import {Divider} from '../components/Divider/Divider';
+import {BreweryCard} from '../components/Card/BreweryCard';
 
 import {colors} from '../theme/colors';
 import {capitalizeFirstLetter} from '../util';
 import {BreweryRouteType} from '../types';
 import {useFavourite, useNavigate} from '../hooks';
+import {checkText} from '../util/checkText';
 
 type Props = {
   route: BreweryRouteType;
@@ -33,6 +34,13 @@ export const BreweryDetailsScreen: React.FC<Props> = ({route}) => {
     }
   };
 
+  const cards = [
+    {title: 'City', value: checkText(city)},
+    {title: 'Brewery Type', value: capitalizeFirstLetter(brewery_type)},
+    {title: 'Phone', value: checkText(phone as string)},
+    {title: 'Address', value: checkText(street)},
+  ];
+
   useEffect(() => {
     if (!isFocused) {
       goBackNav();
@@ -40,9 +48,8 @@ export const BreweryDetailsScreen: React.FC<Props> = ({route}) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFocused]);
 
-  //TODO send only necessary data to each component, review phone card, separate cards into one
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: colors.yellow}}>
+    <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
         {/* Header */}
         <DetailsHeader
@@ -52,34 +59,9 @@ export const BreweryDetailsScreen: React.FC<Props> = ({route}) => {
 
         {/* Info */}
         <View style={styles.row}>
-          <View style={[styles.card, styles.shadow]}>
-            <Text style={styles.cardTitle}>City</Text>
-            <Divider />
-            <Text style={styles.cardText}>{city}</Text>
-          </View>
-
-          <View style={[styles.card, styles.shadow]}>
-            <Text style={styles.cardTitle}>Brewery Type</Text>
-            <Divider />
-
-            <Text style={styles.cardText}>
-              {capitalizeFirstLetter(brewery_type)}
-            </Text>
-          </View>
-        </View>
-
-        <View style={styles.row}>
-          <View style={[styles.card, styles.shadow]}>
-            <Text style={styles.cardTitle}>Phone</Text>
-            <Divider />
-            <Text style={styles.cardText}>{phone}</Text>
-          </View>
-
-          <View style={[styles.card, styles.shadow]}>
-            <Text style={styles.cardTitle}>Address</Text>
-            <Divider />
-            <Text style={styles.cardText}>{street}</Text>
-          </View>
+          {cards.map(({title, value}) => (
+            <BreweryCard key={title} title={title} value={value as string} />
+          ))}
         </View>
 
         {/* Go to web */}
@@ -90,6 +72,7 @@ export const BreweryDetailsScreen: React.FC<Props> = ({route}) => {
 };
 
 const styles = StyleSheet.create({
+  safeArea: {flex: 1, backgroundColor: colors.yellow},
   container: {flex: 1, backgroundColor: colors.black},
   shadow: {
     shadowColor: '#000',
@@ -102,14 +85,17 @@ const styles = StyleSheet.create({
     elevation: 16,
   },
   row: {
+    borderWidth: 1,
     flexDirection: 'row',
     justifyContent: 'space-around',
     marginTop: 25,
+    flexWrap: 'wrap',
   },
   card: {
     backgroundColor: '#505050',
-    flex: 0.5,
+    width: '40%',
     marginHorizontal: 10,
+    marginVertical: 12,
     borderRadius: 10,
   },
   cardTitle: {

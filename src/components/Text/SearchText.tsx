@@ -2,15 +2,17 @@ import React from 'react';
 import {StyleSheet, Text} from 'react-native';
 import {colors} from '../../theme/colors';
 
-export const SearchText: React.FC<{keepWriting: boolean}> = ({keepWriting}) => {
-  return (
-    <Text style={styles.writingAlert}>
-      {keepWriting
-        ? 'Keep on writing...'
-        : 'Write something to start searching by name.'}
-    </Text>
-  );
-};
+export const SearchText: React.FC<{keepWriting: boolean}> = React.memo(
+  ({keepWriting}) => {
+    return (
+      <Text style={styles.writingAlert}>
+        {keepWriting
+          ? 'Keep on writing...'
+          : 'Write something to start searching by name.'}
+      </Text>
+    );
+  },
+);
 
 const styles = StyleSheet.create({
   writingAlert: {

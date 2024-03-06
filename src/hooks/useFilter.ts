@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useCallback, useState} from 'react';
 import {dropdownValues} from '../util/dropdownValues';
 
 export const useFilter = () => {
@@ -6,7 +6,10 @@ export const useFilter = () => {
     dropdownValues[0].value,
   );
 
-  const handleFilterValue = (filter: string) => setFilterValue(filter);
+  const handleFilterValue = useCallback(
+    (filter: string) => setFilterValue(filter),
+    [],
+  );
 
   return {filterValue, handleFilterValue};
 };

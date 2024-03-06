@@ -7,7 +7,7 @@ import {Thumbnail} from '../Thumbnail/Thumbnail';
 import {NoFavourites} from '../Alert';
 import {RootState} from '../../types';
 
-export const FavouritesFlatlist: React.FC = () => {
+export const FavouritesFlatlist: React.FC = React.memo(() => {
   const {favouritesData} = useSelector(
     (state: RootState) => state.favouritesData,
   );
@@ -21,4 +21,4 @@ export const FavouritesFlatlist: React.FC = () => {
       ListEmptyComponent={NoFavourites}
     />
   );
-};
+});

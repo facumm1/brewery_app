@@ -13,7 +13,7 @@ type Props = {
   isLoading: boolean;
 };
 
-export const SearchedFlatlist: React.FC<Props> = ({isLoading}) => {
+export const SearchedFlatlist: React.FC<Props> = React.memo(({isLoading}) => {
   const {searchedData} = useSelector((state: RootState) => state.searchedData);
 
   return (
@@ -25,4 +25,4 @@ export const SearchedFlatlist: React.FC<Props> = ({isLoading}) => {
       ListEmptyComponent={isLoading ? <Loader /> : <NoBreweriesFound />}
     />
   );
-};
+});

@@ -18,7 +18,7 @@ export const SearchStackNavigator: React.FC = () => {
         headerShown: false,
         animation: 'slide_from_right',
       }}>
-      <Stack.Screen name="SearchScreen" children={() => <SearchScreen />} />
+      <Stack.Screen name="SearchScreen" component={SearchScreen} />
       <Stack.Screen
         name="BreweryDetailsScreen"
         component={BreweryDetailsScreen}

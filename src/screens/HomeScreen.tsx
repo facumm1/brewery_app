@@ -1,17 +1,28 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {useDispatch} from 'react-redux';
 
+import {useFetchBreweriesQuery} from '../redux/breweryApi';
 import {BreweriesFlatlist} from '../components/Flatlist';
 import {GoTopButton} from '../components/Button';
 import {colors} from '../theme/colors';
-import {useScroll} from '../hooks';
+import {usePagination, useScroll} from '../hooks';
+import {setBreweries} from '../redux/breweriesSlice';
 
-export const HomeScreen: React.FC<{handlePagination: () => void}> = ({
-  handlePagination,
-}) => {
+export const HomeScreen: React.FC = () => {
+  const {pagination, handlePagination} = usePagination();
   const {showTopBtn, onScroll, flatListRef, scrollToTop} = useScroll();
 
-  //TODO fix empty screen
+  const {data, isLoading} = useFetchBreweriesQuery({page: pagination});
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!isLoading) {
+      dispatch(setBreweries(data));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data, isLoading]);
+
   //Fixed
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -19,7 +30,7 @@ export const HomeScreen: React.FC<{handlePagination: () => void}> = ({
         <Text style={styles.title}>Explore breweries</Text>
 
         <View style={styles.flatlistBox}>
-          <GoTopButton showTopBtn={showTopBtn} scrollToTop={scrollToTop} />
+          {showTopBtn && <GoTopButton scrollToTop={scrollToTop} />}
 
           <BreweriesFlatlist
             flatListRef={flatListRef}

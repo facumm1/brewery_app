@@ -19,7 +19,6 @@ export const FilterDropdown: React.FC<Props> = ({
       <Dropdown
         style={styles.dropdown}
         selectedTextStyle={styles.selectedText}
-        iconStyle={{}}
         labelField="label"
         valueField="value"
         data={dropdownValues}
@@ -45,7 +44,7 @@ const styles = StyleSheet.create({
     paddingVertical: 0,
   },
   selectedText: {
-    color: colors.white,
+    color: colors.black,
     textAlign: 'center',
   },
 });

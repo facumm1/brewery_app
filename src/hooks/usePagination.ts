@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useCallback, useState} from 'react';
 
 type usePaginationHook = {
   pagination: number;
@@ -8,9 +8,9 @@ type usePaginationHook = {
 export const usePagination = (): usePaginationHook => {
   const [pagination, setPagination] = useState<number>(0);
 
-  const handlePagination = () => {
-    setPagination((prevPag: number) => (prevPag += 10));
-  };
+  const handlePagination = useCallback(() => {
+    setPagination((prevPag: number) => (prevPag += 1));
+  }, []);
 
   return {pagination, handlePagination};
 };

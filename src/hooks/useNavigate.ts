@@ -14,7 +14,6 @@ type ScreenName = keyof StackParamList;
 export type NavigateProp = NavigationProp<StackParamList, ScreenName>;
 
 export const useNavigate = (): UseNavigateHook => {
-  //TODO fix types
   const navigation = useNavigation<NavigateProp>();
 
   const navigateTo = (screenName: ScreenName, data: BreweryTypes | any) => {

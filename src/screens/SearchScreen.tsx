@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -23,8 +23,8 @@ export const SearchScreen: React.FC = () => {
     clearResults,
   } = useField();
   const {filterValue, handleFilterValue} = useFilter();
-  const dispatch = useDispatch();
   const {debouncedValue} = useDebouncedValue(fieldValue);
+  const dispatch = useDispatch();
 
   const {data, isFetching, isLoading} = useFilterByNameQuery({
     value: debouncedValue,
@@ -34,7 +34,7 @@ export const SearchScreen: React.FC = () => {
     (state: RootState) => state.favouritesData,
   );
 
-  const checkAddedFavourites = () => {
+  const checkAddedFavourites = useCallback(() => {
     if (favouritesData.length > 0 && data) {
       const updatedData = findFavouriteBreweries(data, favouritesData);
 
@@ -42,7 +42,7 @@ export const SearchScreen: React.FC = () => {
     } else {
       dispatch(setSearchedBreweries(data));
     }
-  };
+  }, [data, dispatch, favouritesData]);
 
   useEffect(() => {
     if (!isLoading) {

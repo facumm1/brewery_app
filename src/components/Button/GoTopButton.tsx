@@ -6,14 +6,11 @@ import {colors} from '../../theme/colors';
 
 type Props = {
   scrollToTop: () => void;
-  showTopBtn: boolean;
 };
 
-export const GoTopButton: React.FC<Props> = ({scrollToTop, showTopBtn}) => {
+export const GoTopButton: React.FC<Props> = React.memo(({scrollToTop}) => {
   return (
-    <TouchableOpacity
-      onPress={scrollToTop}
-      style={[styles.btn, {zIndex: showTopBtn ? 1 : 0}]}>
+    <TouchableOpacity onPress={scrollToTop} style={styles.btn}>
       <MaterialIcons
         style={styles.icon}
         name="keyboard-double-arrow-up"
@@ -22,7 +19,7 @@ export const GoTopButton: React.FC<Props> = ({scrollToTop, showTopBtn}) => {
       />
     </TouchableOpacity>
   );
-};
+});
 
 const styles = StyleSheet.create({
   btn: {
@@ -31,6 +28,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     borderRadius: 25,
     top: 5,
+    zIndex: 1,
   },
   icon: {padding: 5, textAlign: 'center'},
 });
