@@ -1,4 +1,5 @@
 import React from 'react';
+import {Platform} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import {
@@ -31,7 +32,7 @@ export const BottomTabNavigator: React.FC = () => {
         headerShown: false,
         tabBarStyle: {
           backgroundColor: colors.black,
-          height: 90,
+          height: Platform.OS === 'android' ? 70 : 90,
           borderTopWidth: 0,
           elevation: 0,
         },

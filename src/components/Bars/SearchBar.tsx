@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, TextInput} from 'react-native';
+import {StyleSheet, View, TextInput, Platform} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import {CancelSearchButton} from '../Button/CancelSearchButton';
@@ -69,10 +69,11 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     flex: 1,
     alignSelf: 'center',
+    alignItems: 'center',
     flexDirection: 'row',
     backgroundColor: '#505050',
     borderRadius: 15,
-    paddingVertical: 5,
+    paddingVertical: Platform.OS === 'android' ? 0 : 5,
     marginVertical: 5,
   },
   icon: {paddingHorizontal: 10},
