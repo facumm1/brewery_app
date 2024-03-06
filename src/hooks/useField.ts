@@ -10,6 +10,7 @@ export const useField = () => {
 
     if (text.length === 0) {
       setKeepWriting(false);
+      setShowSearchResults(false);
       return;
     }
 

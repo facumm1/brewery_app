@@ -21,7 +21,13 @@ export const breweryApi = createApi({
       },
     }),
     filterByName: builder.query({
-      query: ({name}) => `/breweries?by_name=${name}&page=1&per_page=10`,
+      query: ({value, filterType}) => {
+        if (filterType === 'city') {
+          return `/breweries?by_city=${value}&page=1&per_page=10`;
+        }
+
+        return `/breweries?by_name=${value}&page=1&per_page=10`;
+      },
       transformResponse: (res: ApiResponse) => {
         const breweries = res.map((brewery: BreweryTypes) => ({
           ...brewery,

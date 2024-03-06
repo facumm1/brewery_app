@@ -11,7 +11,7 @@ import {useFilterByNameQuery} from '../redux/breweryApi';
 import {setSearchedBreweries} from '../redux/searchedSlice';
 import {findFavouriteBreweries} from '../util/findFavourites';
 import {RootState} from '../types';
-import {useDebouncedValue, useField} from '../hooks';
+import {useDebouncedValue, useField, useFilter} from '../hooks';
 import {colors} from '../theme/colors';
 
 export const SearchScreen: React.FC = () => {
@@ -22,16 +22,17 @@ export const SearchScreen: React.FC = () => {
     onChangeText,
     clearResults,
   } = useField();
-
+  const {filterValue, handleFilterValue} = useFilter();
+  const dispatch = useDispatch();
   const {debouncedValue} = useDebouncedValue(fieldValue);
+
   const {data, isFetching, isLoading} = useFilterByNameQuery({
-    name: debouncedValue,
+    value: debouncedValue,
+    filterType: filterValue,
   });
   const {favouritesData} = useSelector(
     (state: RootState) => state.favouritesData,
   );
-
-  const dispatch = useDispatch();
 
   const checkAddedFavourites = () => {
     if (favouritesData.length > 0 && data) {
@@ -56,10 +57,12 @@ export const SearchScreen: React.FC = () => {
         <Text style={styles.title}>Search for breweries</Text>
 
         <SearchBar
+          filterValue={filterValue}
           fieldValue={fieldValue}
           showSearchResults={showSearchResults}
           onChangeText={onChangeText}
           clearResults={clearResults}
+          handleFilterValue={handleFilterValue}
         />
 
         {showSearchResults ? (

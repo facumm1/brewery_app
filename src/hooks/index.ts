@@ -5,6 +5,7 @@ import {usePagination} from './usePagination';
 import {useScroll} from './useScroll';
 import {useDebouncedValue} from './useDebounceValue';
 import {useField} from './useField';
+import {useFilter} from './useFilter';
 
 export {
   useFetch,
@@ -14,4 +15,5 @@ export {
   useScroll,
   useDebouncedValue,
   useField,
+  useFilter,
 };
