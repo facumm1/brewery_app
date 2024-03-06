@@ -28,6 +28,7 @@ export const SearchBar: React.FC<Props> = ({
           color={colors.white}
         />
         <TextInput
+          autoCapitalize="none"
           value={fieldValue as string}
           style={styles.textInput}
           placeholder="Filter by name"

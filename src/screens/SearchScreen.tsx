@@ -7,12 +7,12 @@ import {SearchedFlatlist} from '../components/Flatlist';
 import {SearchText} from '../components/Text/SearchText';
 import {SearchBar} from '../components/Bars/SearchBar';
 
-import {colors} from '../theme/colors';
-import {useDebouncedValue, useField} from '../hooks';
 import {useFilterByNameQuery} from '../redux/breweryApi';
 import {setSearchedBreweries} from '../redux/searchedSlice';
-import {RootState} from '../types';
 import {findFavouriteBreweries} from '../util/findFavourites';
+import {RootState} from '../types';
+import {useDebouncedValue, useField} from '../hooks';
+import {colors} from '../theme/colors';
 
 export const SearchScreen: React.FC = () => {
   const {
@@ -24,7 +24,9 @@ export const SearchScreen: React.FC = () => {
   } = useField();
 
   const {debouncedValue} = useDebouncedValue(fieldValue);
-  const {data, isLoading} = useFilterByNameQuery({name: debouncedValue});
+  const {data, isFetching, isLoading} = useFilterByNameQuery({
+    name: debouncedValue,
+  });
   const {favouritesData} = useSelector(
     (state: RootState) => state.favouritesData,
   );
@@ -61,9 +63,7 @@ export const SearchScreen: React.FC = () => {
         />
 
         {showSearchResults ? (
-          <SearchedFlatlist
-            isLoading={debouncedValue === null ? true : false}
-          />
+          <SearchedFlatlist isLoading={isFetching || debouncedValue === null} />
         ) : (
           <SearchText keepWriting={keepWriting} />
         )}

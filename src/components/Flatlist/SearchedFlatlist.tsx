@@ -22,7 +22,7 @@ export const SearchedFlatlist: React.FC<Props> = ({isLoading}) => {
       data={searchedData}
       keyExtractor={({id}) => id}
       renderItem={({item}) => <Thumbnail item={item} />}
-      ListEmptyComponent={isLoading ? Loader : <NoBreweriesFound />}
+      ListEmptyComponent={isLoading ? <Loader /> : <NoBreweriesFound />}
     />
   );
 };

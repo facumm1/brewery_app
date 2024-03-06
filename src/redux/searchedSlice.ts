@@ -11,8 +11,7 @@ export const searchedSlice = createSlice({
     setSearchedBreweries: (state, action) => {
       const newBreweries = action.payload;
 
-      state.searchedData = [...state.searchedData, ...newBreweries];
-
+      state.searchedData = newBreweries;
       state.isLoading = false;
     },
     toggleSearchedBrewery: (state, action) => {
